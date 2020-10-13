@@ -18,7 +18,7 @@ public class main {
     public  static void start() throws SQLException {
         Display();
        boolean onGame=true;
-       while(onGame){
+       while(onGame){ //TRAINER: use the command pattern for this
            menu();
            switch (scanner.nextInt()){
                    case 1:

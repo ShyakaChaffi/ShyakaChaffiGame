@@ -10,7 +10,7 @@ import java.util.List;
 public class BorrowJPARepository {
 
 
-    @PersistenceContext(unitName = "gamePersistenceUnit")
+    @PersistenceContext(unitName = "gamesPersistenceUnit")//TRAINER: watch out for typos in your unitname
     private EntityManager entityManager;
 
     public List<Borrow> findAllBorrow(){

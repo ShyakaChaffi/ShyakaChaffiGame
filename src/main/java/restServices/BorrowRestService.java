@@ -18,8 +18,13 @@ public class BorrowRestService {
 
     @GET
     @Produces("application/json")
-    public GenericEntity<List<Borrow>> findAllBorrows(){
+    public List<Borrow> findAllBorrows(){
         //Without this casting, the application has trouble ton serialize/deserialize the List of Borrow
-        return new GenericEntity<List<Borrow>>(borrowService.findAllBorrow()){};
+        //TRAINER: casting is not needed, maybe you get a LazyInitializationException ?
+        //TRAINER: this means that some fields are set to lazy loading
+        // read this to solve this https://www.baeldung.com/hibernate-initialize-proxy-exception
+        // or you could use a DTO
+        return borrowService.findAllBorrow();
+
     }
 }

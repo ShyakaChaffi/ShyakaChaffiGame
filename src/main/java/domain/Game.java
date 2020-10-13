@@ -2,44 +2,50 @@ package domain;
 
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 @Entity
 public class Game implements Serializable {
 
-    @Id @GeneratedValue
-    private Integer Id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //TRAINER: use Strategy for your primary key
+    private Integer id;
 
-    @Column(nullable = false,length = 200)
+    //TRAINER no snake casing, use camel casing for your field names
+    @Column(nullable = false, length = 200)
     private String game_name;
 
-    @Column(nullable = false,length = 200)
+    @Column(nullable = false, length = 200)
     private String editor;
 
-    @Column(nullable = false,length = 200)
+    @Column(nullable = false, length = 200)
     private String author;
 
+    //TRAINER no snake casing, use camel casing for your field names
     @Column(nullable = false)
     @NotNull
-    private int  year_edition;
+    private int year_edition;
 
-    @Transient
+    //    @Transient //TRAINER: why is age transient?
     private String age;
 
     @Column(name = "min_players")
+    //TRAINER no snake casing, use camel casing for your field names
     private int min_players;
     @Column(name = "max_players")
+    //TRAINER no snake casing, use camel casing for your field names
     private int max_player;
 
-    @OneToOne (fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER) //TRAINER: use eagerly loading to also fetch the category
     @JoinColumn(name = "category_id")
     private Category category;
 
+    //TRAINER no snake casing, use camel casing for your field names
     private String play_duration;
 
-    @OneToOne (fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)//TRAINER: use eagerly loading to also fetch the difficulty
     @JoinColumn(name = "difficulty_id")
     private Difficulty difficulty;
 
@@ -48,13 +54,14 @@ public class Game implements Serializable {
     private String image;
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public Game() {
     }
+
     public Game(Builder builder) {
-        this.Id = builder.Id;
+        this.id = builder.Id;
         this.game_name = builder.game_name;
         this.editor = builder.editor;
         this.author = builder.author;
@@ -77,7 +84,7 @@ public class Game implements Serializable {
         private String game_name;
         private String editor;
         private String author;
-        private int  year_edition;
+        private int year_edition;
         private String age;
         private int min_players;
         private int max_player;
@@ -88,7 +95,6 @@ public class Game implements Serializable {
         private String image;
         private Category category;
         private Difficulty difficulty;
-
 
 
         public Builder(String game_name) {
@@ -120,6 +126,7 @@ public class Game implements Serializable {
             this.year_edition = yearEdition;
             return this;
         }
+
         public Builder withAge(String age) {
             this.age = age;
             return this;
@@ -129,26 +136,32 @@ public class Game implements Serializable {
             this.min_players = minPlayers;
             return this;
         }
+
         public Builder withMaxPlayers(int maxPlayers) {
             this.max_player = maxPlayers;
             return this;
         }
+
         public Builder withPlayDuration(String playDuration) {
             this.play_duration = playDuration;
             return this;
         }
+
         public Builder withPrice(int price) {
             this.price = price;
             return this;
         }
+
         public Builder withImage(String image) {
             this.image = image;
             return this;
         }
+
         public Builder withCategory(Category category) {
             this.category = category;
             return this;
         }
+
         public Builder withDifficulty(Difficulty difficulty) {
             this.difficulty = difficulty;
             return this;
@@ -158,8 +171,9 @@ public class Game implements Serializable {
             return new Game(this);
         }
 
-        }
+    }
 
+    //TRAINER don't use the setters in a builder pattern
 // ------------------Builder-------------------------
     public void setGame_name(String game_name) {
         this.game_name = game_name;
@@ -209,8 +223,8 @@ public class Game implements Serializable {
         this.image = image;
     }
 
-    public int getId() {
-        return Id;
+    public Integer getId() {
+        return id;
     }
 
     public String getGame_name() {

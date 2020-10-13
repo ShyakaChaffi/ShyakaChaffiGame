@@ -30,7 +30,7 @@ public class BorrowJDBCRepository {
             while (resultSet.next()){
                 Game game = new Game.Builder(resultSet.getString("g.game_name")).build();
                 Borrower borrower = new Borrower(resultSet.getString("b2.borrower_name"));
-                Borrow borrow = new Borrow(resultSet.getInt("id"), game, borrower, resultSet.getDate("borrow_date"), resultSet.getDate("return_date"));
+                Borrow borrow = new Borrow(resultSet.getInt("id"), game, borrower, resultSet.getDate("borrow_date").toLocalDate(), resultSet.getDate("return_date").toLocalDate());
                 borrows.add(borrow);
             }
 

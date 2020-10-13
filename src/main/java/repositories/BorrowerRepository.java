@@ -5,6 +5,7 @@ import domain.Category;
 
 import java.sql.*;
 
+//TRAINER: this class already exists (see BorrowerJDBCRepository in JDBC package)
 public class BorrowerRepository {
 
     public static final BorrowerRepository instance= new BorrowerRepository();
@@ -14,6 +15,7 @@ public class BorrowerRepository {
     }
 
 
+    //TRAINER: this method is also in JDBCConnector
     public Connection createConnection() throws SQLException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
