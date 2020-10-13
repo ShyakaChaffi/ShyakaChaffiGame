@@ -7,12 +7,17 @@ import java.io.Serializable;
 public class Borrower implements Serializable {
 
     @Id
-    private int Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //TRAINER: use Strategy for your primary key
+    private int id;
     @Column(nullable = false,length = 200)
+    //TRAINER: use @Column(name = "borrower_name") and give this field a proper name, where you follow the naming conventions of java
+    //TRAINER no snake casing, use camel casing for your field names
     private String borrower_name;
     @Column(nullable = false,length = 200)
     private String street;
 
+    //TRAINER: use @Column(name = "house_number") and give this field a proper name, where you follow the naming conventions of java
+    //TRAINER no snake casing, use camel casing for your field names
     private String house_number;
 
 
@@ -36,7 +41,7 @@ public class Borrower implements Serializable {
     public void setStreet(String street) {
         this.street = street;
     }
-    @Column(nullable = false,length = 200)
+    @Column(nullable = true,length = 200) //TRAINER: bus number can be null
     private String bus_number;
     private int postcode;
     @Column(nullable = false,length = 200)
@@ -46,7 +51,7 @@ public class Borrower implements Serializable {
     private  String email;
 
     public Borrower(Integer id, String borrowerName, String street, String houseNumber, String busNumber, int postcode, String city, String telephone, String email) {
-        this.Id = id;
+        this.id = id;
         this.borrower_name = borrowerName;
         this.street = street;
         this.house_number = houseNumber;
@@ -58,11 +63,11 @@ public class Borrower implements Serializable {
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getBorrower_name() {

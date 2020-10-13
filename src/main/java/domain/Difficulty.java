@@ -3,10 +3,7 @@ package domain;
 import domain.enums.DifficultyType;
 import domain.enums.DifficultyType2;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,15 +12,16 @@ import java.util.List;
 @Entity
 public class Difficulty implements Serializable {
 
-    @Id @GeneratedValue
-    private Integer Id;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) //TRAINER: use Strategy for your primary key
+    private Integer id;
 
     @Column(nullable = false,length = 200)
+    //TRAINER no snake casing, use camel casing for your field names
     private String difficulty_name;
 
     public Difficulty(String difficultyName, Integer id) {
         this.difficulty_name = difficultyName;
-        this.Id = id;
+        this.id = id;
     }
 
     public Difficulty(String difficultyName) {
@@ -42,8 +40,8 @@ public class Difficulty implements Serializable {
     public static boolean equalOrMore(Difficulty d1, DifficultyType difficulty){
         //TODO: Replace that by a system were each enum of difficulty contain a tab of less level difficulties,
         // then search if the d1.difficulty_name is not in this tab
-        System.out.println(d1.Id + " " + difficulty.getDifficultyValue());
-        return d1.Id >= difficulty.getDifficultyValue();
+        System.out.println(d1.id + " " + difficulty.getDifficultyValue());
+        return d1.id >= difficulty.getDifficultyValue();
     }
 
     public static boolean equalOrMore(Difficulty d1, DifficultyType2 difficulty){

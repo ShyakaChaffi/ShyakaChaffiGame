@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-
+//TRAINER: this class already exists (see GameJDBCRepository in JDBC package)
 public class GameReposity {
 
     private static final GameReposity instance = new GameReposity();

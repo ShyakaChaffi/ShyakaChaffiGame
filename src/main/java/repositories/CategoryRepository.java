@@ -3,7 +3,7 @@ package repositories;
 import domain.Category;
 
 import java.sql.*;
-
+//TRAINER: this class already exists (see CategoryJDBCRepository in JDBC package)
 public class CategoryRepository {
 
     public static final CategoryRepository categoryRepository= new CategoryRepository();

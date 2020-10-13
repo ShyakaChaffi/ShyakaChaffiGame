@@ -6,12 +6,13 @@ import domain.Game;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Stateless
 public class GameJPARepository {
 
-    @PersistenceContext(unitName = "gamePersistenceUnit")
+    @PersistenceContext(unitName = "gamesPersistenceUnit")//TRAINER: watch out for typos in your unitname
     EntityManager entityManager;
 
     public Game findGameById(int id){
